@@ -1,5 +1,6 @@
 import json
 import random
+# yg
 from datetime import datetime
 from azure.eventhub import EventHubProducerClient, EventData
 
@@ -13,6 +14,7 @@ def generate_sample_data(num_records):
         }
         data.append(record)
     return data
+
 
 if __name__ == "__main__":
     num_records_to_generate = 10  # You can adjust this as needed

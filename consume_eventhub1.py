@@ -1,6 +1,4 @@
-
 import pyodbc
-
 import json
 from azure.eventhub import EventHubConsumerClient
 from datetime import datetime
