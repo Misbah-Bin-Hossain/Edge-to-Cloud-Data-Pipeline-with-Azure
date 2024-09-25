@@ -1,0 +1,1 @@
+{"version":"1.0","connections":[{"details":{"protocol":"tds","address":{"server":"misbahserver.database.windows.net","database":"My_database"}},"mode":"DirectQuery"}]}
