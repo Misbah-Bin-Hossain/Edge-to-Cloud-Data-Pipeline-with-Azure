@@ -1,8 +1,11 @@
+import os
 import json
 import random
-# yg
 from datetime import datetime
-from azure.eventhub import EventHubProducerClient, EventData
+from azure.storage.queue import QueueClient, BinaryBase64EncodePolicy
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def generate_sample_data(num_records):
     data = []
@@ -15,23 +18,27 @@ def generate_sample_data(num_records):
         data.append(record)
     return data
 
-
 if __name__ == "__main__":
     num_records_to_generate = 10  # You can adjust this as needed
     sample_data = generate_sample_data(num_records_to_generate)
 
-    # Replace with your actual values
-    connection_str = "Endpoint=sb://mynewvm1.servicebus.windows.net/;SharedAccessKeyName=New_key;SharedAccessKey=rTmzn7wW3PHRmhMNeZaNDFnZh6ZtmS9v6+AEhNf0BDk="
-    eventhub_name = "eventhub_m"
+    # Use environment variables
+    connection_string = os.environ.get('AZURE_STORAGE_CONNECTION_STRING')
+    queue_name = os.environ.get('AZURE_STORAGE_QUEUE_NAME')
 
-    producer = EventHubProducerClient.from_connection_string(connection_str, eventhub_name=eventhub_name)
+    if not connection_string or not queue_name:
+        raise ValueError("Please set the AZURE_STORAGE_CONNECTION_STRING and AZURE_STORAGE_QUEUE_NAME environment variables.")
+
+    queue_client = QueueClient.from_connection_string(
+        connection_string, 
+        queue_name,
+        message_encode_policy=BinaryBase64EncodePolicy()
+    )
 
     try:
-        with producer:
-            event_data_batch = producer.create_batch()
-            for record in sample_data:
-                event_data_batch.add(EventData(json.dumps(record)))
-            producer.send_batch(event_data_batch)
-            print(f"{num_records_to_generate} records sent to Event Hub.")
+        for record in sample_data:
+            message = json.dumps(record).encode('utf-8')  # Convert to bytes
+            queue_client.send_message(message)
+        print(f"{num_records_to_generate} records sent to Azure Storage Queue.")
     except Exception as e:
         print(f"Error sending data: {str(e)}")
