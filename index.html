@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Data Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        .chart-container { width: 80%; margin: 20px auto; }
+    </style>
+</head>
+<body>
+    <h1>IoT Sensor Data Dashboard</h1>
+    <div class="chart-container">
+        <canvas id="temperatureChart"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="humidityChart"></canvas>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
