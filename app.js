@@ -1,6 +1,6 @@
 // Fetch data from your API endpoint
 async function fetchData() {
-    const response = await fetch('https://your-render-url.onrender.com/api/data');
+    const response = await fetch('https://dashboard-d4dthwawehbad3bh.northeurope-01.azurewebsites.net/api/data');
     return await response.json();
 }
 
