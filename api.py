@@ -1,17 +1,18 @@
+import os
 from flask import Flask, jsonify
 from flask_cors import CORS
 import pyodbc
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 app = Flask(__name__)
-CORS(app)  # This enables CORS for all routes
+CORS(app)
+
+@app.route('/')
+def home():
+    return "API is running"
 
 @app.route('/api/data')
 def get_data():
-    conn_str = os.getenv('AZURE_SQL_CONNECTION_STRING')
+    conn_str = os.environ['AZURE_SQL_CONNECTION_STRING']
     conn = pyodbc.connect(conn_str)
     cursor = conn.cursor()
     cursor.execute('SELECT TOP 100 timestamp, temperature, humidity FROM your_table ORDER BY timestamp DESC')
@@ -21,4 +22,4 @@ def get_data():
     return jsonify(data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
