@@ -22,6 +22,17 @@ async function createCharts() {
                 borderColor: 'rgb(255, 99, 132)',
                 tension: 0.1
             }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'hour'
+                    }
+                }
+            }
         }
     });
 
@@ -35,6 +46,17 @@ async function createCharts() {
                 borderColor: 'rgb(54, 162, 235)',
                 tension: 0.1
             }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'hour'
+                    }
+                }
+            }
         }
     });
 }
