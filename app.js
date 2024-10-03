@@ -1,6 +1,6 @@
 // Fetch data from your API endpoint
 async function fetchData() {
-    const response = await fetch('https://misbah-bin-hossain.github.io/Azure-Cloud-Inlap1/');
+    const response = await fetch('https://your-render-url.onrender.com/api/data');
     return await response.json();
 }
 
