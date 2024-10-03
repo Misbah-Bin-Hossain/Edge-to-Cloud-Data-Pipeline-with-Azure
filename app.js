@@ -1,6 +1,6 @@
 // Fetch data from your API endpoint
 async function fetchData() {
-    const response = await fetch('/api/data');
+    const response = await fetch('https://misbah-bin-hossain.github.io/Azure-Cloud-Inlap1/');
     return await response.json();
 }
 
