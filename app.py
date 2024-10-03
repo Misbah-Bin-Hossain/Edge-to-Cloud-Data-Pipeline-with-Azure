@@ -1,16 +1,21 @@
+import os
 from flask import Flask, render_template, jsonify
 import pyodbc
 import json
 import traceback
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 
-# SQL Server connection parameters
-sql_server = 'misbahserver.database.windows.net'
-sql_database = 'My_database'
-sql_username = 'ApplicationUser'  # Use the new user created
-sql_password = 'Kabir.asma20'      # Use the password for the new user
-sql_driver = '{ODBC Driver 17 for SQL Server}'  # Ensure this driver is installed
+# SQL Server connection parameters from environment variables
+sql_server = os.getenv('SQL_SERVER')
+sql_database = os.getenv('SQL_DATABASE')
+sql_username = os.getenv('SQL_USERNAME')
+sql_password = os.getenv('SQL_PASSWORD')
+sql_driver = os.getenv('SQL_DRIVER')
 
 # Create a connection to the SQL Server using SQL Server authentication
 def create_sql_connection():
